@@ -2,7 +2,7 @@ import os
 import argparse
 import shutil
 from argparse import Namespace
-
+from datetime import datetime
 
 def parse_arguments() -> Namespace:
     """
@@ -29,7 +29,6 @@ def parse_arguments() -> Namespace:
     )
     return parser.parse_args()
 
-
 def main(args=None):
     """
     メイン関数。音声ファイルを指定のディレクトリにコピーします。
@@ -38,7 +37,8 @@ def main(args=None):
         args = parse_arguments()
 
     if args.directory:
-        raw_dir = os.path.join(f"./data/{args.model_name}", "raw")
+        timestamp = datetime.now().strftime("%y%m%d_%H%M%S")
+        raw_dir = os.path.join(f"./data/{args.model_name}", "raw", timestamp)
         os.makedirs(raw_dir, exist_ok=True)
         for file in os.listdir(args.directory):
             if file.endswith((".mp3", ".wav")):
@@ -50,7 +50,6 @@ def main(args=None):
                         os.path.join(args.directory, file), dest_file
                     )
                     print(f"コピーされたファイル: {dest_file}")
-
 
 if __name__ == "__main__":
     main()
