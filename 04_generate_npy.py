@@ -7,7 +7,7 @@ def parse_arguments():
     コマンドライン引数を解析します。
     """
     parser = argparse.ArgumentParser(description="音声データから npy ファイルを生成します。")
-    parser.add_argument('--directory', '-D', type=str, required=True, help='入力音声��ァイルが含まれるディレクトリのパス')
+    parser.add_argument('--directory', '-D', type=str, required=True, help='入力音声ファイルが含まれるディレクトリのパス')
     parser.add_argument('--checkpoint-path', type=str, help='チェックポイントファイルのパス (環境変数 FS_CHECKPOINT_PATH が優先されます)')
     return parser.parse_args()
 
