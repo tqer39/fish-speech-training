@@ -37,3 +37,10 @@ $env:FS_CHECKPOINT = "fish-speech のチェックポイント"
 $env:FS_CHECKPOINT_PATH = "fish-speech のチェックポイントのパス"
 $env:MODEL_NAME = "モデル名"
 ```
+
+## ファイルコピー
+
+```powershell
+$env:MODEL_NAME = "fish-speech-1.4"
+$env:MODEL_NAME = "fish-speech-1.4"
+```
