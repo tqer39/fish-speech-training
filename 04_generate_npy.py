@@ -13,7 +13,7 @@ def parse_arguments():
 
 def generate_npy(input_file: str, checkpoint_path: str):
     """
-    npy ファ���ルを生成します。
+    npy ファイルを生成します。
     """
     command = [
         'python', 'tools/vqgan/inference.py',
