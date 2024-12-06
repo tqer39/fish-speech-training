@@ -35,7 +35,7 @@ def parse_arguments() -> Namespace:
         help="[OPTION] 既存ファイルを強制的に上書きします。",
     )
     parser.add_argument(
-        "--output-dir", required=True, help="[REQUIRED] 出力ディレクトリのパス"
+        "--output-dir", help="[OPTION] 出力ディレクトリのパス"
     )
     return parser.parse_args()
 
@@ -163,7 +163,9 @@ def main(args: Optional[Namespace] = None) -> None:
         print("モデル名が指定されていません。--model-name オプションまたは MODEL_NAME 環境変数を設定してください。")
         return
 
-    input_dir = f"./data/{model_name}/raw/separate/{args.directory}"
+    input_dir = f"./data/{model_name}/raw/{args.directory}"
+    output_dir = args.output_dir or os.path.join(input_dir, "separate")
+
     if not os.path.isdir(input_dir):
         print(f"入力ディレクトリが見つかりません: {input_dir}")
         return
@@ -172,7 +174,7 @@ def main(args: Optional[Namespace] = None) -> None:
         for file in files:
             input_file = os.path.join(root, file)
             split_audio_file(
-                input_file, args.output_dir, args.start, args.interval, args.overlay, args.force
+                input_file, output_dir, args.start, args.interval, args.overlay, args.force
             )
 
 
