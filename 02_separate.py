@@ -14,7 +14,10 @@ def parse_arguments() -> Namespace:
         description="音声ファイルを指定の間隔で分割します。"
     )
     parser.add_argument(
-        "--input", required=True, help="[REQUIRED] 入力音声ファイルのパス"
+        "--directory", "-D", required=True, help="[REQUIRED] 入力ディレクトリのパス"
+    )
+    parser.add_argument(
+        "--model-name", "-M", help="[OPTION] モデル名（環境変数 MODEL_NAME からも読み取ります）"
     )
     parser.add_argument(
         "--start", type=int, default=0, help="[OPTION] 分割開始時間（秒）"
@@ -155,9 +158,22 @@ def main(args: Optional[Namespace] = None) -> None:
     if args is None:
         args = parse_arguments()
 
-    split_audio_file(
-        args.input, args.output_dir, args.start, args.interval, args.overlay, args.force
-    )
+    model_name = args.model_name or os.getenv("MODEL_NAME")
+    if not model_name:
+        print("モデル名が指定されていません。--model-name オプションまたは MODEL_NAME 環境変数を設定してください。")
+        return
+
+    input_dir = f"./data/{model_name}/raw/separate/{args.directory}"
+    if not os.path.isdir(input_dir):
+        print(f"入力ディレクトリが見つかりません: {input_dir}")
+        return
+
+    for root, _, files in os.walk(input_dir):
+        for file in files:
+            input_file = os.path.join(root, file)
+            split_audio_file(
+                input_file, args.output_dir, args.start, args.interval, args.overlay, args.force
+            )
 
 
 if __name__ == "__main__":
