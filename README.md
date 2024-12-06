@@ -67,11 +67,13 @@ foreach ($script in $scripts) {
 
 ```powershell
 cd $env:WORKSPACE\fish-speech
-.venv\Scripts\python 01_file_copy.py -D .\data\source\d_208302_af_junjo_ot_after\alarm
+.venv\Scripts\python 01_file_copy.py -D .\data\source\sample
 ```
 
 ## ファイルの分割
 
+`-D` オプションには、ファイルコピーで生成されたタイムスタンプを指定する。
+
 ```powershell
-.venv\Scripts\python 02_separate.py -D .\data\source\sample
+.venv\Scripts\python 02_separate.py -D YYMMDD_HMMMSS
 ```
