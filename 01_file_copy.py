@@ -22,7 +22,7 @@ def parse_arguments() -> Namespace:
         help="[OPTION] 元になる音声ファイル（mp3, wav など）のパスを指定するディレクトリ",
     )
     parser.add_argument(
-        "--force",
+        "--force", "-F",
         action="store_true",
         help="[OPTION] 同名のファイルがある場合に強制的に上書きします。",
     )
