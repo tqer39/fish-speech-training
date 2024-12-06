@@ -19,7 +19,7 @@ def parse_arguments() -> Namespace:
 
     # [OPTION] 引数
     parser.add_argument(
-        "--directory",
+        "--directory", "-D",
         help="[OPTION] 元になる音声ファイル（mp3, wav など）のパスを指定するディレクトリ",
     )
     parser.add_argument(
