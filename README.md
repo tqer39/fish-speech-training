@@ -34,7 +34,7 @@ uv pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url ht
 uv pip install fish-audio-preprocess pydub whisper click
 uv pip install -e .[stable]
 pip install huggingface-hub
-huggingface-cli download fishaudio/fish-speech-$env:FS_VERSION --local-dir checkpoints/fish-speech-$env:FS_VERSION
+huggingface-cli download fishaudio/fish-speech-$env:FS_VERSION --local-dir $env:FS_CHECKPOINT
 
 # やり直し用
 # uv rm --dev --python "$PYTHON_VERSION" torch torchvision torchaudio
