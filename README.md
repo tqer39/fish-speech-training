@@ -25,3 +25,11 @@ uv pip install -e .[stable]
 # やり直し用
 # uv rm --dev --python "$PYTHON_VERSION" torch torchvision torchaudio
 ```
+
+## 環境変数
+
+`MODEL_NAME` という環境変数にモデル名を設定する。
+
+```powershell
+$env:MODEL_NAME = "モデル名"
+```
