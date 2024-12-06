@@ -12,8 +12,9 @@ def parse_arguments() -> Namespace:
         description="音声ファイルを指定のディレクトリにコピーします。"
     )
     # [REQUIRED] 引数
+    model_name_default = os.getenv("MODEL_NAME")
     parser.add_argument(
-        "--model-name", "-M", required=True, help="[REQUIRED] コピー先のディレクトリ名"
+        "--model-name", "-M", required=not bool(model_name_default), default=model_name_default, help="[REQUIRED] コピー先のディレクトリ名"
     )
 
     # [OPTION] 引数
