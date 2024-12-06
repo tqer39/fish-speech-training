@@ -77,3 +77,9 @@ cd $env:WORKSPACE\fish-speech
 ```powershell
 .venv\Scripts\python 02_separate.py -D YYMMDD_HMMMSS
 ```
+
+## ファイルの正規化
+
+```powershell
+.venv\Scripts\python 03_normalize.py -D YYMMDD_HMMMSS
+```
