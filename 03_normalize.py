@@ -18,12 +18,7 @@ def parse_arguments() -> argparse.ArgumentParser:
     )
     parser.add_argument("arg", nargs="?", help="引数")
     parser.add_argument(
-        "--model-name", required=True, help="[REQUIRED] モデル名を指定します。"
-    )
-    parser.add_argument(
-        "--normalize-only",
-        action="store_true",
-        help="[OPTION] ファイル正規化のみを実行します。",
+        "--model-name", "-M", required=True, help="[REQUIRED] モデル名を指定します。"
     )
     parser.add_argument(
         "--loudness-target",
@@ -66,24 +61,23 @@ def main(args: Optional[Namespace] = None) -> None:
         sys.exit(1)
     args = parser.parse_args()
 
-    raw_dir: str = f"./data/{args.model_name}/raw"
+    model_name = os.getenv("MODEL_NAME", args.model_name)
+
+    raw_dir: str = f"./data/{model_name}/raw"
     separate_dir: str = os.path.join(raw_dir, "separate")
-    normalize_dir: str = os.path.join(f"./data/{args.model_name}", "normalize_loudness")
+    normalize_dir: str = os.path.join(f"./data/{model_name}", "normalize_loudness")
     os.makedirs(separate_dir, exist_ok=True)
     os.makedirs(normalize_dir, exist_ok=True)
     normalize_flag_file: str = os.path.join(normalize_dir, ".normalized")
 
-    # ファイル正規化のみを実行
-    if args.normalize_only:
-        if os.path.exists(normalize_flag_file) and not args.force_normalize:
-            print("ラウドネス正規化は既に適用されています。")
-        else:
-            # ラウドネス正規化を適用
-            normalize_loudness(separate_dir, normalize_dir, args.loudness_target)
-            with open(normalize_flag_file, "w") as f:
-                f.write("normalized")
-        sys.exit(0)
-
+    # ラウドネス正規化を適用
+    if os.path.exists(normalize_flag_file) and not args.force_normalize:
+        print("ラウドネス正規化は既に適用されています。")
+    else:
+        normalize_loudness(separate_dir, normalize_dir, args.loudness_target)
+        with open(normalize_flag_file, "w") as f:
+            f.write("normalized")
+        print("ラウドネス正規化を適用しました。")
 
 if __name__ == "__main__":
     main()
