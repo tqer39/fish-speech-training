@@ -13,7 +13,7 @@ def parse_arguments() -> Namespace:
     )
     # [REQUIRED] 引数
     parser.add_argument(
-        "--model-name", required=True, help="[REQUIRED] コピー先のディレクトリ名"
+        "--model-name", "-M", required=True, help="[REQUIRED] コピー先のディレクトリ名"
     )
 
     # [OPTION] 引数
