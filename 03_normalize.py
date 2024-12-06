@@ -28,7 +28,7 @@ def parse_arguments() -> argparse.ArgumentParser:
         "ターゲット値を上げると音量が大きくなり、下げると音量が小さくなります。",
     )
     parser.add_argument(
-        "--force-normalize",
+        "--force", "-F",
         action="store_true",
         help="[OPTION] ラウドネス正規化を強制します。",
     )
@@ -74,7 +74,7 @@ def main(args: Optional[Namespace] = None) -> None:
     normalize_flag_file: str = os.path.join(normalize_dir, ".normalized")
 
     # ラウドネス正規化を適用
-    if os.path.exists(normalize_flag_file) and not args.force_normalize:
+    if os.path.exists(normalize_flag_file) and not args.force:
         print("ラウドネス正規化は既に適用されています。")
     else:
         normalize_loudness(separate_dir, normalize_dir, args.loudness_target)
