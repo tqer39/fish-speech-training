@@ -18,7 +18,7 @@ def parse_arguments() -> argparse.ArgumentParser:
     )
     parser.add_argument("arg", nargs="?", help="引数")
     parser.add_argument(
-        "--model-name", "-M", required=True, help="[REQUIRED] モデル名を指定します。"
+        "--model-name", "-M", help="[OPTION] モデル名を指定します。"
     )
     parser.add_argument(
         "--loudness-target",
@@ -61,7 +61,10 @@ def main(args: Optional[Namespace] = None) -> None:
         sys.exit(1)
     args = parser.parse_args()
 
-    model_name = os.getenv("MODEL_NAME", args.model_name)
+    model_name = os.getenv("MODEL_NAME") or args.model_name
+    if not model_name:
+        print("モデル名が指定されていません。")
+        sys.exit(1)
 
     raw_dir: str = f"./data/{model_name}/raw"
     separate_dir: str = os.path.join(raw_dir, "separate")
