@@ -1,5 +1,8 @@
 # fish-speech-training
 
+fish-speech を動かすためのスクリプトを管理するリポジトリ。
+PowerShell を管理者権限で実行することを前提とする。
+
 ## 環境変数
 
 事前に環境変数を設定しておく。
