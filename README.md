@@ -37,7 +37,7 @@ pip install huggingface-hub
 huggingface-cli download fishaudio/fish-speech-$env:FS_VERSION --local-dir $env:FS_CHECKPOINT
 
 # やり直し用
-# uv rm --dev --python "$PYTHON_VERSION" torch torchvision torchaudio
+# uv rm --python "$PYTHON_VERSION" torch torchvision torchaudio
 ```
 
 ## ファイルコピー
