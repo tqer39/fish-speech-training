@@ -43,6 +43,26 @@ huggingface-cli download fishaudio/fish-speech-$env:FS_VERSION --local-dir $env:
 # uv rm --python "$PYTHON_VERSION" torch torchvision torchaudio
 ```
 
+## スクリプトをシムリンク
+
+このプロジェクトのルートにある python スクリプトを fish-speech のディレクトリにシムリンクする。
+
+```powershell
+# まずスクリプトのファイルをリストに入れる
+$scripts = @(
+    "01_file_copy.py",
+    "02_separate.py",
+    "03_normalize.py",
+    "04_generate_npy.py"
+)
+
+# fish-speech のディレクトリにシムリンクを作成する
+foreach ($script in $scripts) {
+    $dest = Join-Path -Path $env:WORKSPACE -ChildPath "fish-speech\$script"
+    New-Item -ItemType SymbolicLink -Path $dest -Value $script -Force
+}
+```
+
 ## ファイルコピー
 
 ```powershell
