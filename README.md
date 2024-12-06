@@ -31,5 +31,9 @@ uv pip install -e .[stable]
 `MODEL_NAME` という環境変数にモデル名を設定する。
 
 ```powershell
+$env:WORKSPACE = "ワークスペースパス"
+$env:FS_REPO_URL = "fish-speech のリポジトリ URL"
+$env:FS_CHECKPOINT = "fish-speech のチェックポイント"
+$env:FS_CHECKPOINT_PATH = "fish-speech のチェックポイントのパス"
 $env:MODEL_NAME = "モデル名"
 ```
