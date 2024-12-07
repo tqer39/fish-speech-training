@@ -83,3 +83,9 @@ cd $env:WORKSPACE\fish-speech
 ```powershell
 .venv\Scripts\python 03_normalize.py -D YYMMDD_HMMMSS
 ```
+
+## ファイルの npy 化
+
+```powershell
+.venv\Scripts\python 04_generate_npy.py -D YYMMDD_HMMMSS
+```
