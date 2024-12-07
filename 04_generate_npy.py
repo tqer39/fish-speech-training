@@ -18,7 +18,7 @@ def generate_npy(input_file: str, output_dir: str, checkpoint_path: str):
     """
     output_file = os.path.join(output_dir, os.path.splitext(os.path.basename(input_file))[0] + '.npy')
     command = [
-        '.venv\Scripts\python', 'tools/vqgan/inference.py',
+        '.venv\\Scripts\\python', 'tools/vqgan/inference.py',
         '-i', input_file,
         '--checkpoint-path', checkpoint_path,
         '-o', output_file
@@ -26,7 +26,7 @@ def generate_npy(input_file: str, output_dir: str, checkpoint_path: str):
     print(f"Executing command: {' '.join(command)}")  # デバッグ用にコマンドを出力
     result = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if result.returncode != 0:
-        print(f"Error: {result.stderr.decode('utf-8')}")
+        print(f"Error: {result.stderr.decode('utf-8', errors='ignore')}")
     else:
         print(f"Generated npy file: {output_file}")
 
