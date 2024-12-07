@@ -14,7 +14,6 @@ def parse_arguments():
         "--directory",
         "-D",
         type=str,
-        required=True,
         help="入力音声ファイルが含まれるディレクトリのパス",
     )
     parser.add_argument(
@@ -59,6 +58,10 @@ def main():
     directory = os.getenv("FS_DATA_TS") or args.directory
     model_name = os.getenv("MODEL_NAME") or args.model_name
     checkpoint_path = os.getenv("FS_CHECKPOINT_PATH") or args.checkpoint_path
+
+    if not directory:
+        print("ディレクトリが指定されていません。")
+        return
 
     if not model_name:
         print("モデル名が指定されていません。")
