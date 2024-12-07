@@ -22,7 +22,11 @@ def parse_arguments() -> argparse.Namespace:
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
     parser.add_argument(
-        "--config-name", "-C", type=str, required=True, help="Config name for training"
+        "--config-name",
+        "-C",
+        type=str,
+        default="firefly_gan_vq",
+        help="Config name for training",
     )
     return parser.parse_args()
 
