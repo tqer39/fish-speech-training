@@ -68,11 +68,13 @@ def main(args: Optional[Namespace] = None) -> None:
         print("モデル名が指定されていません。")
         return
 
+    directory = os.getenv("FS_DATA_TS") or args.directory
+
     target_dir = (
         args.override_path
-        or f"./data/{model_name}/raw/{args.directory}/before_text_reformatting"
+        or f"./data/{model_name}/raw/{directory}/before_text_reformatting"
     )
-    output_dir = f"./data/{model_name}/raw/{args.directory}/protobuf"
+    output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
     create_protobuf(target_dir, output_dir, args.force)
 
