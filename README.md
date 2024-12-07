@@ -117,6 +117,12 @@ $env:FS_DATA_TS = "YYMMDD_HMMMSS"
 .venv\Scripts\python 05_speech_to_text.py
 ```
 
+## npy ファイルと lab ファイルを元に npy ファイルを生成
+
+```powershell
+.venv\Scripts\python 06_generate_wav_and_lab_to_npy.py
+```
+
 ## Protobuf ファイルの生成
 
 ```powershell
