@@ -56,7 +56,8 @@ $scripts = @(
     "04_generate_wav_to_npy.py",
     "05_speech_to_text.py",
     "06_generate_wav_and_lab_to_npy.py",
-    "07_create_protobuf.py"
+    "07_create_protobuf.py",
+    "fish_speech\configs\text2semantic_finetune_customize.yaml"
 )
 
 # fish-speech のディレクトリにシムリンクを作成する
