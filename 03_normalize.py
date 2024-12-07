@@ -13,9 +13,7 @@ def parse_arguments() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="音声ファイルにラウドネス正規化を適用します。"
     )
-    parser.add_argument(
-        "--directory", "-D", required=True, help="[REQUIRED] 入力ディレクトリのパス"
-    )
+    parser.add_argument("--directory", "-D", help="[OPTION] 入力ディレクトリのパス")
     parser.add_argument("--model-name", "-M", help="[OPTION] モデル名を指定します。")
     parser.add_argument(
         "--loudness-target",
@@ -65,6 +63,12 @@ def main(args: Optional[Namespace] = None) -> None:
         sys.exit(1)
 
     directory = os.getenv("FS_DATA_TS") or args.directory
+    if not directory:
+        print(
+            "エラー: --directory オプションまたは FS_DATA_TS 環境変数を指定してください。"
+        )
+        sys.exit(1)
+
     input_dir = f"./data/{model_name}/raw/{directory}/separate"
     normalize_dir = f"./data/{model_name}/raw/{directory}/normalize_loudness"
     os.makedirs(normalize_dir, exist_ok=True)
