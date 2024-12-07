@@ -1,7 +1,6 @@
 import subprocess
 import os
 from typing import Optional
-import sys
 import argparse
 from argparse import Namespace
 
