@@ -56,7 +56,7 @@ def generate_npy(input_file: str, output_dir: str, checkpoint_path: str):
 def main():
     args = parse_arguments()
 
-    directory = args.directory
+    directory = os.getenv("FS_DATA_TS") or args.directory
     model_name = os.getenv("MODEL_NAME") or args.model_name
     checkpoint_path = os.getenv("FS_CHECKPOINT_PATH") or args.checkpoint_path
 
