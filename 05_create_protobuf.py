@@ -23,8 +23,8 @@ def parse_arguments() -> argparse.Namespace:
         required=True,
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
-    parser.add_argument(
-        "--override-path",
+    return parser.parse_args()
+
         help="[OPTION] 処理対象のディレクトリを指定します。デフォルトは './data/{model_name}/raw/{directory}/before_text_reformatting' です。",
     )
     return parser.parse_args()
@@ -72,7 +72,7 @@ def main(args: Optional[Namespace] = None) -> None:
 
     target_dir = (
         args.override_path
-        or f"./data/{model_name}/raw/{directory}/before_text_reformatting"
+        or f"./data/{model_name}/raw/{directory}/npy"
     )
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
