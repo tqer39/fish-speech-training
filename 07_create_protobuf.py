@@ -23,6 +23,12 @@ def parse_arguments() -> argparse.Namespace:
         type=str,
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
+    parser.add_argument(
+        "--target-dir",
+        "-T",
+        type=str,
+        help="[OPTION] target_dir を指定します。",
+    )
     return parser.parse_args()
 
 
@@ -69,7 +75,7 @@ def main(args: Optional[Namespace] = None) -> None:
         print("ディレクトリが指定されていません。")
         return
 
-    target_dir = f"./data/{model_name}/raw/{directory}/dataset"
+    target_dir = args.target_dir or f"./data/{model_name}/raw/{directory}/dataset"
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
     create_protobuf(target_dir, output_dir, args.force)
