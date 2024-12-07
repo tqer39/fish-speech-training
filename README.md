@@ -53,7 +53,9 @@ $scripts = @(
     "01_file_copy.py",
     "02_separate.py",
     "03_normalize.py",
-    "04_generate_npy.py"
+    "04_generate_npy.py",
+    "05_speech_to_text.py",
+    "06_create_protobuf.py"
 )
 
 # fish-speech のディレクトリにシムリンクを作成する
@@ -72,20 +74,35 @@ cd $env:WORKSPACE\fish-speech
 
 ## ファイルの分割
 
-`-D` オプションには、ファイルコピーで生成されたタイムスタンプを指定する。
+`-D` オプションには、ファイルコピーで生成されたディレクトリ名を指定する。
 
 ```powershell
-.venv\Scripts\python 02_separate.py -D YYMMDD_HMMMSS
+$env:FS_DATA_TS = "YYMMDD_HMMMSS"
+.venv\Scripts\python 02_separate.py
 ```
 
 ## ファイルの正規化
 
 ```powershell
-.venv\Scripts\python 03_normalize.py -D YYMMDD_HMMMSS
+.venv\Scripts\python 03_normalize.py
 ```
 
-## ファイルの npy 化
+## 音声データから npy ファイルを生成
+
+これは正直やらなくてもいいかもしれない。
 
 ```powershell
-.venv\Scripts\python 04_generate_npy.py -D YYMMDD_HMMMSS
+.venv\Scripts\python 04_generate_npy.py
+```
+
+## 音声データから文字起こしファイルを生成
+
+```powershell
+.venv\Scripts\python 05_speech_to_text.py
+```
+
+## Protobuf ファイルの生成
+
+```powershell
+.venv\Scripts\python 06_create_protobuf.py
 ```
