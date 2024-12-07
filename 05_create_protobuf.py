@@ -25,10 +25,6 @@ def parse_arguments() -> argparse.Namespace:
     )
     return parser.parse_args()
 
-        help="[OPTION] 処理対象のディレクトリを指定します。デフォルトは './data/{model_name}/raw/{directory}/before_text_reformatting' です。",
-    )
-    return parser.parse_args()
-
 
 def create_protobuf(input_dir: str, output_dir: str, force: bool) -> None:
     """
@@ -69,11 +65,7 @@ def main(args: Optional[Namespace] = None) -> None:
         return
 
     directory = os.getenv("FS_DATA_TS") or args.directory
-
-    target_dir = (
-        args.override_path
-        or f"./data/{model_name}/raw/{directory}/npy"
-    )
+    target_dir = f"./data/{model_name}/raw/{directory}/npy"
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
     create_protobuf(target_dir, output_dir, args.force)
