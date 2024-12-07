@@ -64,8 +64,9 @@ def main(args: Optional[Namespace] = None) -> None:
         print("モデル名が指定されていません。")
         sys.exit(1)
 
-    input_dir = f"./data/{model_name}/raw/{args.directory}/separate"
-    normalize_dir = f"./data/{model_name}/raw/{args.directory}/normalize_loudness"
+    directory = os.getenv("FS_DATA_TS") or args.directory
+    input_dir = f"./data/{model_name}/raw/{directory}/separate"
+    normalize_dir = f"./data/{model_name}/raw/{directory}/normalize_loudness"
     os.makedirs(normalize_dir, exist_ok=True)
     normalize_flag_file = os.path.join(normalize_dir, ".normalized")
 
