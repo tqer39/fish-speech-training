@@ -126,5 +126,5 @@ $env:FS_DATA_TS = "YYMMDD_HMMMSS"
 ## Protobuf ファイルの生成
 
 ```powershell
-.venv\Scripts\python 06_create_protobuf.py
+.venv\Scripts\python 07_create_protobuf.py
 ```
