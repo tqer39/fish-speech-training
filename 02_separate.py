@@ -165,7 +165,8 @@ def main(args: Optional[Namespace] = None) -> None:
         )
         return
 
-    input_dir = f"./data/{model_name}/raw/{args.directory}"
+    directory = os.getenv("FS_DATA_TS") or args.directory
+    input_dir = f"./data/{model_name}/raw/{directory}"
     output_dir = args.output_dir or os.path.join(input_dir, "separate")
 
     if not os.path.isdir(input_dir):
