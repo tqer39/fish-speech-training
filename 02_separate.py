@@ -13,9 +13,7 @@ def parse_arguments() -> Namespace:
     parser = argparse.ArgumentParser(
         description="音声ファイルを指定の間隔で分割します。"
     )
-    parser.add_argument(
-        "--directory", "-D", help="[OPTION] 入力ディレクトリのパス"
-    )
+    parser.add_argument("--directory", "-D", help="[OPTION] 入力ディレクトリのパス")
     parser.add_argument(
         "--model-name",
         "-M",
@@ -166,6 +164,12 @@ def main(args: Optional[Namespace] = None) -> None:
         return
 
     directory = os.getenv("FS_DATA_TS") or args.directory
+    if not directory:
+        print(
+            "エラー: --directory オプションまたは FS_DATA_TS 環境変数を指定してください。"
+        )
+        return
+
     input_dir = f"./data/{model_name}/raw/{directory}"
     output_dir = args.output_dir or os.path.join(input_dir, "separate")
 
