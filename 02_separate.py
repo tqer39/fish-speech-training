@@ -14,7 +14,7 @@ def parse_arguments() -> Namespace:
         description="音声ファイルを指定の間隔で分割します。"
     )
     parser.add_argument(
-        "--directory", "-D", required=True, help="[REQUIRED] 入力ディレクトリのパス"
+        "--directory", "-D", help="[OPTION] 入力ディレクトリのパス"
     )
     parser.add_argument(
         "--model-name",
