@@ -16,7 +16,9 @@ def generate_npy(input_file: str, output_dir: str, checkpoint_path: str):
     """
     npy ファイルを生成します。
     """
-    output_file = os.path.join(output_dir, os.path.splitext(os.path.basename(input_file))[0] + '.npy')
+    base_name = os.path.splitext(os.path.basename(input_file))[0]
+    encoded_name = base_name.encode('shift_jis', errors='ignore').decode('shift_jis')
+    output_file = os.path.join(output_dir, encoded_name + '.npy')
     command = [
         '.venv\\Scripts\\python', 'tools/vqgan/inference.py',
         '-i', input_file,
