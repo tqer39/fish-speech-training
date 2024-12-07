@@ -16,9 +16,7 @@ def parse_arguments() -> argparse.ArgumentParser:
     parser.add_argument(
         "--directory", "-D", required=True, help="[REQUIRED] 入力ディレクトリのパス"
     )
-    parser.add_argument(
-        "--model-name", "-M", help="[OPTION] モデル名を指定します。"
-    )
+    parser.add_argument("--model-name", "-M", help="[OPTION] モデル名を指定します。")
     parser.add_argument(
         "--loudness-target",
         type=float,
@@ -27,7 +25,8 @@ def parse_arguments() -> argparse.ArgumentParser:
         "ターゲット値を上げると音量が大きくなり、下げると音量が小さくなります。",
     )
     parser.add_argument(
-        "--force", "-F",
+        "--force",
+        "-F",
         action="store_true",
         help="[OPTION] ラウドネス正規化を強制します。",
     )
@@ -78,6 +77,7 @@ def main(args: Optional[Namespace] = None) -> None:
         with open(normalize_flag_file, "w") as f:
             f.write("normalized")
         print("ラウドネス正規化を適用しました。")
+
 
 if __name__ == "__main__":
     main()

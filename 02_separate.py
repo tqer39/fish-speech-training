@@ -17,7 +17,9 @@ def parse_arguments() -> Namespace:
         "--directory", "-D", required=True, help="[REQUIRED] 入力ディレクトリのパス"
     )
     parser.add_argument(
-        "--model-name", "-M", help="[OPTION] モデル名（環境変数 MODEL_NAME からも読み取ります）"
+        "--model-name",
+        "-M",
+        help="[OPTION] モデル名（環境変数 MODEL_NAME からも読み取ります）",
     )
     parser.add_argument(
         "--start", type=int, default=0, help="[OPTION] 分割開始時間（秒）"
@@ -34,9 +36,7 @@ def parse_arguments() -> Namespace:
         action="store_true",
         help="[OPTION] 既存ファイルを強制的に上書きします。",
     )
-    parser.add_argument(
-        "--output-dir", help="[OPTION] 出力ディレクトリのパス"
-    )
+    parser.add_argument("--output-dir", help="[OPTION] 出力ディレクトリのパス")
     return parser.parse_args()
 
 
@@ -160,7 +160,9 @@ def main(args: Optional[Namespace] = None) -> None:
 
     model_name = args.model_name or os.getenv("MODEL_NAME")
     if not model_name:
-        print("モデル名が指定されていません。--model-name オプションまたは MODEL_NAME 環境変数を設定してください。")
+        print(
+            "モデル名が指定されていません。--model-name オプションまたは MODEL_NAME 環境変数を設定してください。"
+        )
         return
 
     input_dir = f"./data/{model_name}/raw/{args.directory}"
@@ -174,7 +176,12 @@ def main(args: Optional[Namespace] = None) -> None:
         for file in files:
             input_file = os.path.join(root, file)
             split_audio_file(
-                input_file, output_dir, args.start, args.interval, args.overlay, args.force
+                input_file,
+                output_dir,
+                args.start,
+                args.interval,
+                args.overlay,
+                args.force,
             )
 
 

@@ -4,6 +4,7 @@ import shutil
 from argparse import Namespace
 from datetime import datetime
 
+
 def parse_arguments() -> Namespace:
     """
     コマンドライン引数を解析します。
@@ -14,20 +15,27 @@ def parse_arguments() -> Namespace:
     # [REQUIRED] 引数
     model_name_default = os.getenv("MODEL_NAME")
     parser.add_argument(
-        "--model-name", "-M", required=not bool(model_name_default), default=model_name_default, help="[REQUIRED] コピー先のディレクトリ名"
+        "--model-name",
+        "-M",
+        required=not bool(model_name_default),
+        default=model_name_default,
+        help="[REQUIRED] コピー先のディレクトリ名",
     )
 
     # [OPTION] 引数
     parser.add_argument(
-        "--directory", "-D",
+        "--directory",
+        "-D",
         help="[OPTION] 元になる音声ファイル（mp3, wav など）のパスを指定するディレクトリ",
     )
     parser.add_argument(
-        "--force", "-F",
+        "--force",
+        "-F",
         action="store_true",
         help="[OPTION] 同名のファイルがある場合に強制的に上書きします。",
     )
     return parser.parse_args()
+
 
 def main(args=None):
     """
@@ -46,10 +54,9 @@ def main(args=None):
                 if os.path.exists(dest_file) and not args.force:
                     print(f"スキップされたファイル: {dest_file}（既に存在します）")
                 else:
-                    shutil.copy(
-                        os.path.join(args.directory, file), dest_file
-                    )
+                    shutil.copy(os.path.join(args.directory, file), dest_file)
                     print(f"コピーされたファイル: {dest_file}")
+
 
 if __name__ == "__main__":
     main()
