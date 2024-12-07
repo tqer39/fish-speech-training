@@ -20,7 +20,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--directory",
         "-D",
-        required=True,
+        type=str,
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
     return parser.parse_args()
@@ -65,6 +65,10 @@ def main(args: Optional[Namespace] = None) -> None:
         return
 
     directory = os.getenv("FS_DATA_TS") or args.directory
+    if not directory:
+        print("ディレクトリが指定されていません。")
+        return
+
     target_dir = f"./data/{model_name}/raw/{directory}/npy"
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
