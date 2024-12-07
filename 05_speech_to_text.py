@@ -27,10 +27,9 @@ def parse_arguments() -> Namespace:
         help="[OPTION] 出力ファイルの拡張子。デフォルトは 'lab' です。",
     )
     parser.add_argument(
-        "--whisper-model-name",
-        type=str,
-        default="base",
-        help="[OPTION] Whisper で使用するモデル。デフォルトは 'base' です。",
+        "--whisper-model",
+        "-W",
+        help="[OPTION] Whisper モデル名（環境変数 WHISPER_MODEL からも読み取ります）",
     )
     return parser.parse_args()
 
@@ -51,6 +50,13 @@ def main(args: Optional[Namespace] = None) -> None:
     if args is None:
         args = parse_arguments()
 
+    whisper_model = args.whisper_model or os.getenv("WHISPER_MODEL")
+    if not whisper_model:
+        print(
+            "Whisper モデル名が指定されていません。--whisper-model オプションまたは WHISPER_MODEL 環境変数を設定してください。"
+        )
+        return
+
     os.makedirs(args.output_dir, exist_ok=True)
 
     for file in sorted(os.listdir(args.input_dir)):
@@ -59,7 +65,7 @@ def main(args: Optional[Namespace] = None) -> None:
             output_file: str = os.path.join(
                 args.output_dir, os.path.splitext(file)[0] + f".{args.extension}"
             )
-            text: str = speech_to_text(input_file, args.whisper_model_name)
+            text: str = speech_to_text(input_file, whisper_model)
             with open(output_file, "w", encoding="utf-8") as f:
                 f.write(text)
             print(f"テキストデータを保存しました: {output_file}")
