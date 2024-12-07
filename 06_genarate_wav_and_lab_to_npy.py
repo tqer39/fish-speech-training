@@ -46,6 +46,26 @@ def parse_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
+def run_extract_vq(target_dir: str, args: Namespace) -> None:
+    """
+    extract_vq.py スクリプトを実行します。
+    """
+    command = [
+        ".venv/Scripts/python",
+        "tools/vqgan/extract_vq.py",
+        target_dir,
+        "--num-workers",
+        str(args.num_workers),
+        "--batch-size",
+        str(args.batch_size),
+        "--config-name",
+        args.config_name,
+        "--checkpoint-path",
+        args.checkpoint_path,
+    ]
+    subprocess.run(command, check=True)
+
+
 def main(args: Optional[Namespace] = None) -> None:
     """
     メイン関数。extract_vq.py スクリプトを実行します。
@@ -65,20 +85,7 @@ def main(args: Optional[Namespace] = None) -> None:
 
     target_dir = f"./data/{model_name}/raw/{directory}/dataset"
 
-    command = [
-        ".venv/Scripts/python",
-        "tools/vqgan/extract_vq.py",
-        target_dir,
-        "--num-workers",
-        str(args.num_workers),
-        "--batch-size",
-        str(args.batch_size),
-        "--config-name",
-        args.config_name,
-        "--checkpoint-path",
-        args.checkpoint_path,
-    ]
-    subprocess.run(command, check=True)
+    run_extract_vq(target_dir, args)
 
 
 if __name__ == "__main__":
