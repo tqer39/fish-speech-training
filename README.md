@@ -92,7 +92,7 @@ $env:FS_DATA_TS = "YYMMDD_HMMMSS"
 これは正直やらなくてもいいかもしれない。
 
 ```powershell
-.venv\Scripts\python 04_generate_npy.py
+.venv\Scripts\python 04_generate_wav_to_npy.py
 ```
 
 ## 音声データから文字起こしファイルを生成
