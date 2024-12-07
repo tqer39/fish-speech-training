@@ -16,12 +16,6 @@ def parse_arguments() -> argparse.Namespace:
         "--model-name", "-M", type=str, help="Name of the model to fine-tune"
     )
     parser.add_argument(
-        "--directory",
-        "-D",
-        type=str,
-        help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
-    )
-    parser.add_argument(
         "--config-name",
         "-C",
         type=str,
@@ -58,11 +52,6 @@ def main(args: Optional[Namespace] = None) -> None:
     model_name = os.getenv("MODEL_NAME") or args.model_name
     if not model_name:
         print("モデル名が指定されていません。")
-        return
-
-    directory = os.getenv("FS_DATA_TS") or args.directory
-    if not directory:
-        print("ディレクトリが指定されていません。")
         return
 
     training(model_name, args.config_name)
