@@ -1,4 +1,3 @@
-import scripts.speech_to_text as speech_to_text
 import sys
 import argparse
 import subprocess
