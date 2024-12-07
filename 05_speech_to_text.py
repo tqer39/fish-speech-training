@@ -13,23 +13,26 @@ def parse_arguments() -> Namespace:
         description="音声ファイルからテキストデータを抽出し、同名のファイルに保存します。"
     )
     parser.add_argument(
-        "--input-dir", required=True, help="[REQUIRED] 入力音声ファイルのディレクトリ"
+        "--directory",
+        "-D",
+        required=True,
+        help="[REQUIRED] 入力音声ファイルが含まれるディレクトリのパス",
     )
     parser.add_argument(
-        "--output-dir",
-        required=True,
-        help="[REQUIRED] 出力テキストファイルのディレクトリ",
+        "--model-name",
+        "-M",
+        help="[OPTION] モデル名（環境変数 MODEL_NAME からも読み取ります）",
+    )
+    parser.add_argument(
+        "--whisper-model",
+        "-W",
+        help="[OPTION] Whisper モデル名（環境変数 WHISPER_MODEL からも読み取ります）",
     )
     parser.add_argument(
         "--extension",
         type=str,
         default="lab",
         help="[OPTION] 出力ファイルの拡張子。デフォルトは 'lab' です。",
-    )
-    parser.add_argument(
-        "--whisper-model",
-        "-W",
-        help="[OPTION] Whisper モデル名（環境変数 WHISPER_MODEL からも読み取ります）",
     )
     return parser.parse_args()
 
@@ -57,14 +60,18 @@ def main(args: Optional[Namespace] = None) -> None:
         )
         return
 
-    os.makedirs(args.output_dir, exist_ok=True)
+    model_name = os.getenv("MODEL_NAME") or args.model_name
+    if not model_name:
+        print("モデル名が指定されていません。")
+        return
 
-    for file in sorted(os.listdir(args.input_dir)):
+    directory = os.getenv("FS_DATA_TS") or args.directory
+    input_dir = f"./data/{model_name}/raw/{directory}/normalize_loudness"
+
+    for file in sorted(os.listdir(input_dir)):
         if file.endswith((".mp3", ".wav")):
-            input_file: str = os.path.join(args.input_dir, file)
-            output_file: str = os.path.join(
-                args.output_dir, os.path.splitext(file)[0] + f".{args.extension}"
-            )
+            input_file: str = os.path.join(input_dir, file)
+            output_file: str = os.path.splitext(input_file)[0] + f".{args.extension}"
             text: str = speech_to_text(input_file, whisper_model)
             with open(output_file, "w", encoding="utf-8") as f:
                 f.write(text)
