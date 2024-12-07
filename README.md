@@ -57,6 +57,7 @@ $scripts = @(
     "05_speech_to_text.py",
     "06_generate_wav_and_lab_to_npy.py",
     "07_create_protobuf.py",
+    "08_training.py",
     "fish_speech\configs\text2semantic_finetune_customize.yaml"
 )
 
