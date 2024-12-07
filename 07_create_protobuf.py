@@ -69,7 +69,7 @@ def main(args: Optional[Namespace] = None) -> None:
         print("ディレクトリが指定されていません。")
         return
 
-    target_dir = f"./data/{model_name}/raw/{directory}/npy"
+    target_dir = f"./data/{model_name}/raw/{directory}/dataset"
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
     create_protobuf(target_dir, output_dir, args.force)
