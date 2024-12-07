@@ -22,10 +22,13 @@ def parse_arguments() -> argparse.Namespace:
         type=str,
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
+    parser.add_argument(
+        "--config-name", "-C", type=str, required=True, help="Config name for training"
+    )
     return parser.parse_args()
 
 
-def training(project: str) -> None:
+def training(project: str, config_name: str) -> None:
     """
     モデルをトレーニングします。
     """
@@ -35,7 +38,7 @@ def training(project: str) -> None:
         ".venv/Scripts/python",
         "fish_speech/train.py",
         "--config-name",
-        "text2semantic_finetune",
+        config_name,
         f"project={project}",
         "+lora@model.model.lora_config=r_8_alpha_16",
     ]
@@ -59,7 +62,7 @@ def main(args: Optional[Namespace] = None) -> None:
         print("ディレクトリが指定されていません。")
         return
 
-    training(model_name)
+    training(model_name, args.config_name)
 
 
 if __name__ == "__main__":
