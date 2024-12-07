@@ -22,7 +22,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--checkpoint-path",
         type=str,
-        default="checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth",
+        default=os.getenv("FS_CHECKPOINT_PATH", "checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth"),
         help="チェックポイントファイルのパスを指定します。",
     )
     parser.add_argument(
