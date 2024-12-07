@@ -53,7 +53,7 @@ $scripts = @(
     "01_file_copy.py",
     "02_separate.py",
     "03_normalize.py",
-    "04_generate_npy.py",
+    "04_generate_wav_to_npy.py",
     "05_speech_to_text.py",
     "06_create_protobuf.py"
 )
@@ -63,6 +63,21 @@ foreach ($script in $scripts) {
     $dest = Join-Path -Path $env:WORKSPACE -ChildPath "fish-speech\$script"
     New-Item -ItemType SymbolicLink -Path $dest -Value $script -Force
 }
+```
+
+### 一括でシムリンクを解除する場合
+
+```powershell
+foreach ($script in $scripts) {
+    $dest = Join-Path -Path $env:WORKSPACE -ChildPath "fish-speech\$script"
+    Remove-Item -Path $dest
+}
+```
+
+### 個別でシムリンクを解除する場合
+
+```powershell
+Remove-Item Join-Path -Path $env:WORKSPACE -ChildPath "fish-speech\01_file_copy.py"
 ```
 
 ## ファイルコピー
