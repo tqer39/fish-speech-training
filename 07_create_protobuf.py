@@ -78,6 +78,7 @@ def main(args: Optional[Namespace] = None) -> None:
     target_dir = args.target_dir or f"./data/{model_name}/raw/{directory}/dataset"
     output_dir = f"./data/{model_name}/raw/{directory}/protobuf"
 
+    os.makedirs(output_dir, exist_ok=True)
     create_protobuf(target_dir, output_dir, args.force)
 
 
