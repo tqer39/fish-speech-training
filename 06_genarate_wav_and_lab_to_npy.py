@@ -19,6 +19,30 @@ def parse_arguments() -> argparse.Namespace:
         type=str,
         help="[REQUIRED] YYMMDD_HHMMSS フォーマットのディレクトリ名を指定します。",
     )
+    parser.add_argument(
+        "--checkpoint-path",
+        type=str,
+        default="checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth",
+        help="チェックポイントファイルのパスを指定します。",
+    )
+    parser.add_argument(
+        "--config-name",
+        type=str,
+        default="firefly_gan_vq",
+        help="設定ファイルの名前を指定します。",
+    )
+    parser.add_argument(
+        "--num-workers",
+        type=int,
+        default=1,
+        help="ワーカーの数を指定します。",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=16,
+        help="バッチサイズを指定します。",
+    )
     return parser.parse_args()
 
 
@@ -46,13 +70,13 @@ def main(args: Optional[Namespace] = None) -> None:
         "tools/vqgan/extract_vq.py",
         target_dir,
         "--num-workers",
-        "1",
+        str(args.num_workers),
         "--batch-size",
-        "16",
+        str(args.batch_size),
         "--config-name",
-        "firefly_gan_vq",
+        args.config_name,
         "--checkpoint-path",
-        "checkpoints/fish-speech-1.5/firefly-gan-vq-fsq-8x1024-21hz-generator.pth",
+        args.checkpoint_path,
     ]
     subprocess.run(command, check=True)
 
