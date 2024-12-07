@@ -15,8 +15,7 @@ def parse_arguments() -> Namespace:
     parser.add_argument(
         "--directory",
         "-D",
-        required=True,
-        help="[REQUIRED] 入力音声ファイルが含まれるディレクトリのパス",
+        help="入力音声ファイルが含まれるディレクトリのパス",
     )
     parser.add_argument(
         "--model-name",
@@ -66,6 +65,10 @@ def main(args: Optional[Namespace] = None) -> None:
         return
 
     directory = os.getenv("FS_DATA_TS") or args.directory
+    if not directory:
+        print("ディレクトリが指定されていません。")
+        return
+
     input_dir = f"./data/{model_name}/raw/{directory}/normalize_loudness"
 
     for file in sorted(os.listdir(input_dir)):
