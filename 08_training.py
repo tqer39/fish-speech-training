@@ -25,7 +25,7 @@ def parse_arguments() -> argparse.Namespace:
         "--config-name",
         "-C",
         type=str,
-        default="firefly_gan_vq",
+        default="text2semantic_finetune_customize",
         help="Config name for training",
     )
     return parser.parse_args()
