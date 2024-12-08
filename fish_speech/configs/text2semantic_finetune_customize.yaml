@@ -17,6 +17,7 @@ trainer:
   val_check_interval: 100
   strategy:
     process_group_backend: gloo
+    find_unused_parameters: true
 
 # Dataset Configuration
 tokenizer:
