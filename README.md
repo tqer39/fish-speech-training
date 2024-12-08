@@ -130,3 +130,9 @@ $env:FS_DATA_TS = "YYMMDD_HMMMSS"
 ```powershell
 .venv\Scripts\python 07_create_protobuf.py
 ```
+
+## モデルの学習
+
+```powershell
+.venv\Scripts\python 08_training.py
+```
